@@ -114,6 +114,14 @@ def mostrar_resultado(pareto_df, metodo):
             ]
         })
         st.dataframe(stats_df, hide_index=True)
+
+        st.markdown("### 🟦🟩 Legend")
+        st.markdown("""
+        - 🟦 **Blue points**: Shelters selected by the algorithm.
+        - 🟩 **Green points**: Shelters selected by both the algorithm and the Municipality of Lima.
+        """)
+
+        
         show_map(shelter_data)
 
 
