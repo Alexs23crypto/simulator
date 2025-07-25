@@ -28,14 +28,12 @@ with col2:
         st.session_state.page = "SPEA"
 
 with col3:
-    if st.button("⚖️ Comparative"):
+    if st.button("⚖️ Agreement"):
         st.session_state.page = "Comparative"
 
-# --- Cargar albergues
-albergues_df = load_shelters()
 
 # --- Función para renderizar una vista
-def mostrar_resultado(pareto_df, metodo):
+def mostrar_resultado(albergues_df, pareto_df, metodo):
     st.markdown(f"### 📊 Pareto Front - {metodo}")
 
     # --- Dividir espacio inferior en 3 columnas
@@ -124,11 +122,13 @@ def mostrar_resultado(pareto_df, metodo):
 # --- Mostrar contenido basado en botón seleccionado
 if st.session_state.page == "NSGA":
     pareto_df = pd.read_excel("frontera_pareto.xlsx")
-    mostrar_resultado(pareto_df, "NSGA-II")
+    albergues_df = load_shelters()
+    mostrar_resultado(albergues_df,pareto_df, "NSGA-II")
 
 elif st.session_state.page == "SPEA":
     pareto_df = pd.read_excel("frontera_pareto.xlsx")
-    mostrar_resultado(pareto_df, "SPEA-II")
+    albergues_df = pd.read_excel("albergues_select_nsga.xlsx")
+    mostrar_resultado(albergues_df, pareto_df, "SPEA-II")
 
 elif st.session_state.page == "Comparative":
     st.subheader("⚖️ Comparative analysis between NSGA-II and SPEA-II")
