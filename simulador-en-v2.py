@@ -48,11 +48,18 @@ def mostrar_resultado(pareto_df, metodo):
         # Añadir color
         pareto_df['Color'] = pareto_df['Indice'].apply(lambda x: 'Selected' if x == selected_id else 'Not selected')
         
+        translated_df = pareto_df.rename(columns={
+            'Distancia entre albergues': 'Distance between shelters',
+            'Vulnerabilidad y riesgo sísmico': 'Seismic vulnerability and risk',
+            'Población demandada': 'Demanded population'
+        })
+        
+        # Gráfico 3D con nombres en inglés
         fig = px.scatter_3d(
-            pareto_df,
-            x='Distancia entre albergues',
-            y='Vulnerabilidad y riesgo sísmico',
-            z='Población demandada',
+            translated_df,
+            x='Distance between shelters',
+            y='Seismic vulnerability and risk',
+            z='Demanded population',
             color='Color',
             color_discrete_map={'Selected': 'red', 'Not selected': 'blue'},
             custom_data=['Indice'],
