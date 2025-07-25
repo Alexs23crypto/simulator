@@ -13,21 +13,31 @@ def show_map(selected_shelters):
     nsga = folium.FeatureGroup(name='Algorithm Selection')
 
     for _, albergue in selected_shelters.iterrows():
+        marker_popup = folium.Popup(
+            f"District: {albergue['DISTRITO']}<br>Place: {albergue['ALBERGUE']}", max_width=300)
+
         if albergue['Estado'] == 'N':
-            # Marcadores de Municipalidad
-            folium.Marker(
-                [albergue['LATITUD'], albergue['LONGITUD']],
-                popup=f"District: {albergue['DISTRITO']} - Place: {albergue['ALBERGUE']}",
-                icon=folium.Icon(color='green', icon='home', prefix='fa')
+            # Marcadores de Municipalidad con CircleMarker más pequeño
+            folium.CircleMarker(
+                location=[albergue['LATITUD'], albergue['LONGITUD']],
+                radius=4,  # tamaño del punto
+                color='green',
+                fill=True,
+                fill_color='green',
+                fill_opacity=0.7,
+                popup=marker_popup
             ).add_to(municipality)
         else:
-            # Marcadores de NSGA-II
-            folium.Marker(
-                [albergue['LATITUD'], albergue['LONGITUD']],
-                popup=f"District: {albergue['DISTRITO']} - Place: {albergue['ALBERGUE']}",
-                icon=folium.Icon(color='blue', icon='home', prefix='fa')
+            # Marcadores de NSGA-II con CircleMarker más pequeño
+            folium.CircleMarker(
+                location=[albergue['LATITUD'], albergue['LONGITUD']],
+                radius=4,  # tamaño del punto
+                color='blue',
+                fill=True,
+                fill_color='blue',
+                fill_opacity=0.7,
+                popup=marker_popup
             ).add_to(nsga)
-
 
     municipality.add_to(m)
     nsga.add_to(m)
