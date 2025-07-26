@@ -92,6 +92,12 @@ def mostrar_resultado(albergues_df, pareto_df, metodo):
         
         st.plotly_chart(fig, use_container_width=True)
 
+        st.markdown("""
+        **Objective 1**: Distance between shelters  
+        **Objective 2**: Seismic vulnerability and risk  
+        **Objective 3**: Demanded population
+        """)
+
     with col2:
         st.subheader("🗺️ Map of Shelters")
         # Filtrar datos seleccionados
