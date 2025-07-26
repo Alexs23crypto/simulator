@@ -55,17 +55,32 @@ def mostrar_resultado(albergues_df, pareto_df, metodo):
         
         # Gráfico 3D con nombres en inglés
         fig = px.scatter_3d(
-            translated_df,
+        translated_df,
             x='Distance between shelters',
             y='Seismic vulnerability and risk',
             z='Demanded population',
             color='Color',
             color_discrete_map={'Selected': 'red', 'Not selected': 'blue'},
             custom_data=['Indice'],
-            height=500
+            height=500,
+            labels={
+                'Distance between shelters': 'Objective 1',
+                'Seismic vulnerability and risk': 'Objective 2',
+                'Demanded population': 'Objective 3'
+            }
         )
-
-        fig.update_layout(showlegend=False)
+        
+        # Refuerza los títulos por si no los toma bien
+        fig.update_layout(
+            scene=dict(
+                xaxis_title='Objective 1',
+                yaxis_title='Objective 2',
+                zaxis_title='Objective 3'
+            ),
+            showlegend=False
+        )
+        
+        # Tooltip personalizado con los nombres reales
         fig.update_traces(
             hovertemplate="<br>".join([
                 "Solution: %{customdata[0]}",
@@ -74,6 +89,7 @@ def mostrar_resultado(albergues_df, pareto_df, metodo):
                 "Demanded population: %{z}"
             ])
         )
+        
         st.plotly_chart(fig, use_container_width=True)
 
     with col2:
