@@ -8,7 +8,7 @@ import ast
 
 from funciones import show_map, load_shelters
 
-#st.set_page_config(page_title="Shelter Location Simulator", layout="wide")
+st.set_page_config(page_title="Shelter Location Simulator", layout="wide")
 st.title("🏠 Shelter Location Simulator")
 
 # --- Página principal con selección
@@ -126,19 +126,18 @@ albergues_df = load_shelters()
 mostrar_resultado(albergues_df,pareto_df, "NSGA-II")
 
 
-'''
-if st.session_state.page == "NSGA":
-    pareto_df = pd.read_excel("frontera_pareto.xlsx")
-    albergues_df = load_shelters()
-    mostrar_resultado(albergues_df,pareto_df, "NSGA-II")
 
-elif st.session_state.page == "SPEA":
-    pareto_df = pd.read_excel("frontera_pareto.xlsx")
-    albergues_df = pd.read_excel("albergues_select_nsga.xlsx")
-    mostrar_resultado(albergues_df, pareto_df, "SPEA-II")
+#if st.session_state.page == "NSGA":
+    #pareto_df = pd.read_excel("frontera_pareto.xlsx")
+    #albergues_df = load_shelters()
+    #mostrar_resultado(albergues_df,pareto_df, "NSGA-II")
 
-elif st.session_state.page == "Comparative":
-    st.subheader("⚖️ Comparative analysis between NSGA-II and SPEA-II")
-    st.info("This section will show a comparative analysis of both algorithm results (to be implemented).")
-'''
+#elif st.session_state.page == "SPEA":
+    #pareto_df = pd.read_excel("frontera_pareto.xlsx")
+    #albergues_df = pd.read_excel("albergues_select_nsga.xlsx")
+    #mostrar_resultado(albergues_df, pareto_df, "SPEA-II")
+
+#elif st.session_state.page == "Comparative":
+    #st.subheader("⚖️ Comparative analysis between NSGA-II and SPEA-II")
+    #st.info("This section will show a comparative analysis of both algorithm results (to be implemented).")
 
