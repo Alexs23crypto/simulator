@@ -62,6 +62,7 @@ def mostrar_resultado(albergues_df, pareto_df, metodo):
             color='Color',
             color_discrete_map={'Selected': 'red', 'Not selected': 'blue'},
             custom_data=['Indice'],
+            text='Indice',
             height=500,
             labels={
                 'Distance between shelters': 'Objective 1',
@@ -82,6 +83,7 @@ def mostrar_resultado(albergues_df, pareto_df, metodo):
         
         # Tooltip personalizado con los nombres reales
         fig.update_traces(
+            textposition='top center',
             hovertemplate="<br>".join([
                 "Solution: %{customdata[0]}",
                 "Distance between shelters: %{x}",
