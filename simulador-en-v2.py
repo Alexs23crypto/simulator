@@ -8,28 +8,28 @@ import ast
 
 from funciones import show_map, load_shelters
 
-st.set_page_config(page_title="Shelter Location Simulator", layout="wide")
+#st.set_page_config(page_title="Shelter Location Simulator", layout="wide")
 st.title("🏠 Shelter Location Simulator")
 
 # --- Página principal con selección
-st.markdown("### Select an optimization algorithm to explore the selected shelters:")
-col1, col2, col3 = st.columns(3)
+#st.markdown("### Select an optimization algorithm to explore the selected shelters:")
+#col1, col2, col3 = st.columns(3)
 
 # Variables de control
-if "page" not in st.session_state:
-    st.session_state.page = None
+#if "page" not in st.session_state:
+    #st.session_state.page = None
 
-with col1:
-    if st.button("🔷 NSGA-II"):
-        st.session_state.page = "NSGA"
+#with col1:
+    #if st.button("🔷 NSGA-II"):
+        #st.session_state.page = "NSGA"
 
-with col2:
-    if st.button("🔶 SPEA-II"):
-        st.session_state.page = "SPEA"
+#with col2:
+    #if st.button("🔶 SPEA-II"):
+        #st.session_state.page = "SPEA"
 
-with col3:
-    if st.button("⚖️ Agreement"):
-        st.session_state.page = "Comparative"
+#with col3:
+    #if st.button("⚖️ Agreement"):
+        #st.session_state.page = "Comparative"
 
 
 # --- Función para renderizar una vista
@@ -120,6 +120,13 @@ def mostrar_resultado(albergues_df, pareto_df, metodo):
 
 
 # --- Mostrar contenido basado en botón seleccionado
+
+pareto_df = pd.read_excel("frontera_pareto.xlsx")
+albergues_df = load_shelters()
+mostrar_resultado(albergues_df,pareto_df, "NSGA-II")
+
+
+'''
 if st.session_state.page == "NSGA":
     pareto_df = pd.read_excel("frontera_pareto.xlsx")
     albergues_df = load_shelters()
@@ -133,4 +140,5 @@ elif st.session_state.page == "SPEA":
 elif st.session_state.page == "Comparative":
     st.subheader("⚖️ Comparative analysis between NSGA-II and SPEA-II")
     st.info("This section will show a comparative analysis of both algorithm results (to be implemented).")
+'''
 
