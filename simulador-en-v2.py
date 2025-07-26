@@ -34,7 +34,8 @@ st.title("🏠 Shelter Location Simulator")
 
 # --- Función para renderizar una vista
 def mostrar_resultado(albergues_df, pareto_df, metodo):
-    st.markdown(f"### 📊 Pareto Front - {metodo}")
+    #st.markdown(f"### 📊 Pareto Front - {metodo}")
+    st.markdown(f"### 📊 Lima Emergency Shelter Planning Tool")
 
     # --- Dividir espacio inferior en 3 columnas
     col1, col2 = st.columns([1, 2.2])  # Col3 un poco más ancha
