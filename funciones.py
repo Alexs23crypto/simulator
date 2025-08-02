@@ -53,9 +53,9 @@ def show_map(selected_shelters):
             folium.CircleMarker(
                 location=[muni['LATITUD'], muni['LONGITUD']],
                 radius=4,
-                color='green',
+                color='red',
                 fill=True,
-                fill_color='green',
+                fill_color='red',
                 fill_opacity=0.7,
                 popup=marker_popup
             ).add_to(municipality)
