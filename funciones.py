@@ -52,7 +52,7 @@ def show_map(selected_shelters):
 
             folium.CircleMarker(
                 location=[muni['LATITUD'], muni['LONGITUD']],
-                radius=4,
+                radius=2,
                 color='red',
                 fill=True,
                 fill_color='red',
