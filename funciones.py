@@ -8,9 +8,14 @@ def load_shelters():
 
 
 def show_map(selected_shelters):
+    muni_df = pd.read_excel("ALBERGUES TEMPORALES MUNICIPALIDAD_v2.xlsx")
+    
     m = folium.Map(location=[-12.0464, -77.0428], zoom_start=10)
-    municipality = folium.FeatureGroup(name='Municipality of Lima')
+    both = folium.FeatureGroup(name='Algorithm and Municipality of Lima')
     nsga = folium.FeatureGroup(name='Algorithm Selection')
+    municipality = folium.FeatureGroup(name = 'Municipality of Lima')
+
+    show_muni = st.checkbox("Show Municipality shelters")
 
     for _, albergue in selected_shelters.iterrows():
         marker_popup = folium.Popup(
@@ -26,7 +31,7 @@ def show_map(selected_shelters):
                 fill_color='green',
                 fill_opacity=0.7,
                 popup=marker_popup
-            ).add_to(municipality)
+            ).add_to(both)
         else:
             # Marcadores de NSGA-II con CircleMarker más pequeño
             folium.CircleMarker(
@@ -39,7 +44,26 @@ def show_map(selected_shelters):
                 popup=marker_popup
             ).add_to(nsga)
 
-    municipality.add_to(m)
+    if show_muni:
+        for _, muni in muni_df.iterrows():
+            marker_popup = folium.Popup(
+                f"District: {muni['DISTRITO']}<br>Place: {muni['ALBERGUE']}", max_width=300)
+
+            folium.CircleMarker(
+                location=[muni['LATITUD'], muni['LONGITUD']],
+                radius=4,
+                color='green',
+                fill=True,
+                fill_color='green',
+                fill_opacity=0.7,
+                popup=marker_popup
+            ).add_to(municipality)
+
+        municipality.add_to(m)
+
+    #municipality.add_to(m)
     nsga.add_to(m)
+    both.add_to(m)
+    
     folium.LayerControl(position='topright').add_to(m)
     folium_static(m)
