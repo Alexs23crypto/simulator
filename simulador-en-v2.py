@@ -45,7 +45,15 @@ def mostrar_resultado(albergues_df, pareto_df, metodo):
 
         selected_id = st.selectbox("Select a solution:", pareto_df['Indice'], index=0)
         # Añadir color
-        pareto_df['Color'] = pareto_df['Indice'].apply(lambda x: 'Selected' if x == selected_id else 'Not selected')
+        def assign_color(x):
+            if x == 20:
+                return 'Black'
+            elif x == selected_id:
+                return 'Selected'
+            else:
+                return 'Not selected'
+                
+        pareto_df['Color'] = pareto_df['Indice'].apply(assign_color)
         
         translated_df = pareto_df.rename(columns={
             'Distancia entre albergues': 'Distance between shelters',
@@ -60,7 +68,7 @@ def mostrar_resultado(albergues_df, pareto_df, metodo):
             y='Seismic vulnerability and risk',
             z='Demanded population',
             color='Color',
-            color_discrete_map={'Selected': 'red', 'Not selected': 'blue'},
+            color_discrete_map={'Selected': 'red', 'Not selected': 'blue', 'Municipality of Lima': 'black'},
             custom_data=['Indice'],
             text='Indice',
             height=500,
