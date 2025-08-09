@@ -146,7 +146,7 @@ def mostrar_resultado(albergues_df, pareto_df, metodo):
 
 # --- Mostrar contenido basado en botón seleccionado
 
-pareto_df = pd.read_excel("frontera_pareto.xlsx")
+pareto_df = pd.read_excel("frontera_pareto1.xlsx")
 albergues_df = load_shelters()
 mostrar_resultado(albergues_df,pareto_df, "NSGA-II")
 
