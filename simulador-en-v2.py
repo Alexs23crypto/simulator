@@ -47,7 +47,7 @@ def mostrar_resultado(albergues_df, pareto_df, metodo):
         # Añadir color
         def assign_color(x):
             if x == 20:
-                return 'Black'
+                return 'Municipality of Lima'
             elif x == selected_id:
                 return 'Selected'
             else:
