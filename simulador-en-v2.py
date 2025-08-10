@@ -63,51 +63,31 @@ def mostrar_resultado(albergues_df, pareto_df, metodo):
         })
         
         # Gráfico 3D con nombres en inglés
-        # Crear gráfico 3D
-        fig = px.scatter_3d(
-            translated_df,
-            x='Distance between shelters',
-            y='Seismic vulnerability and risk',
-            z='Demanded population',
-            color='Color',
-            color_discrete_map={
-                'Selected': 'red',
-                'Not selected': 'blue',
-                'Municipality of Lima': 'black'
-            },
-            custom_data=['Indice'],
-            text='Indice',
-            height=500,
-            labels={
-                'Distance between shelters': 'f1(Distance)',
-                'Seismic vulnerability and risk': 'f2(Vulnerability)',
-                'Demanded population': 'f3(Coverage)'
-            }
+        fig = plt.figure(figsize=(8, 6))
+        ax = fig.add_subplot(111, projection='3d')
+        
+        # Graficar puntos
+        ax.scatter(
+            translated_df['Distance between shelters'],
+            translated_df['Seismic vulnerability and risk'],
+            translated_df['Demanded population'],
+            c='blue',
+            marker='o'
         )
         
-        # Configuración de ejes y sin leyenda
-        fig.update_layout(
-            scene=dict(
-                xaxis_title='f1(Distance)',
-                yaxis_title='f2(Vulnerability)',
-                zaxis_title='f3(Coverage)'
-            ),
-            showlegend=False
-        )
+        # Etiquetas
+        ax.set_xlabel('f1 (Distance)')
+        ax.set_ylabel('f2 (Vulnerability)')
+        ax.set_zlabel('f3 (Coverage)')
+        ax.set_title('Frente de Pareto')
         
-        # Tooltip personalizado
-        fig.update_traces(
-            textposition='top center',
-            hovertemplate="<br>".join([
-                "Solution: %{customdata[0]}",
-                "Distance between shelters: %{x}",
-                "Seismic vulnerability and risk: %{y}",
-                "Demanded population: %{z}"
-            ])
-        )
+        # Ajustar estilo
+        ax.grid(True)
+        ax.view_init(elev=20, azim=45)  # Controla el ángulo de vista
         
         # Mostrar en Streamlit
-        st.plotly_chart(fig, use_container_width=True)
+        st.pyplot(fig)
+            
                 
         
         #fig = px.scatter_3d(
