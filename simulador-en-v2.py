@@ -65,7 +65,25 @@ def mostrar_resultado(albergues_df, pareto_df, metodo):
         # Gráfico 3D con nombres en inglés
         fig = plt.figure(figsize=(8, 6))
         ax = fig.add_subplot(111, projection='3d')
-        
+
+        ax.scatter(
+            translated_df[translated_df['Indice'] == selected_id]['Distance between shelters'],
+            translated_df[translated_df['Indice'] == selected_id]['Seismic vulnerability and risk'],
+            translated_df[translated_df['Indice'] == selected_id]['Demanded population'],
+            c='red',
+            marker='o',
+            label='Municipality of Lima'
+        )
+
+        ax.scatter(
+            translated_df[translated_df['Indice'] == 20]['Distance between shelters'],
+            translated_df[translated_df['Indice'] == 20]['Seismic vulnerability and risk'],
+            translated_df[translated_df['Indice'] == 20]['Demanded population'],
+            c='black',
+            marker='o',
+            label='Municipality of Lima'
+        )  
+                
         # Graficar puntos
         ax.scatter(
             translated_df['Distance between shelters'],
