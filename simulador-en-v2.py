@@ -66,6 +66,15 @@ def mostrar_resultado(albergues_df, pareto_df, metodo):
         fig = plt.figure(figsize=(8, 6))
         ax = fig.add_subplot(111, projection='3d')
 
+        # Graficar puntos
+        ax.scatter(
+            translated_df['Distance between shelters'],
+            translated_df['Seismic vulnerability and risk'],
+            translated_df['Demanded population'],
+            c='blue',
+            marker='o'
+        )
+
         ax.scatter(
             translated_df[translated_df['Indice'] == selected_id]['Distance between shelters'],
             translated_df[translated_df['Indice'] == selected_id]['Seismic vulnerability and risk'],
@@ -84,14 +93,7 @@ def mostrar_resultado(albergues_df, pareto_df, metodo):
             label='Municipality of Lima'
         )  
                 
-        # Graficar puntos
-        ax.scatter(
-            translated_df['Distance between shelters'],
-            translated_df['Seismic vulnerability and risk'],
-            translated_df['Demanded population'],
-            c='blue',
-            marker='o'
-        )
+        
         
         # Etiquetas
         ax.set_xlabel('f1 (Distance)')
