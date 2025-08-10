@@ -63,16 +63,31 @@ def mostrar_resultado(albergues_df, pareto_df, metodo):
         })
         
         # Gráfico 3D con nombres en inglés
-        fig = plt.figure()
+        fig = plt.figure(figsize=(10, 7))
         ax = fig.add_subplot(111, projection='3d')
-        ax.scatter(translated_df['Distance between shelters'], translated_df['Seismic vulnerability and risk'], translated_df['Demanded population'], c='blue', marker='o')
-        ax.set_xlabel('f1(Distance)')
-        ax.set_ylabel('f2(Vulnerability)')
-        ax.set_zlabel('f3(Coverage)')
         
-        #plt.title('Frente de Pareto')
-        plt.show()
+        # Puntos del frente de Pareto
+        ax.scatter(
+            translated_df['Distance between shelters'], 
+            translated_df['Seismic vulnerability and risk'], 
+            translated_df['Demanded population'], 
+            c='royalblue', 
+            s=60,             # tamaño de puntos
+            alpha=0.8,        # transparencia ligera
+            edgecolors='k'    # borde negro para resaltar
+        )
 
+        ax.scatter(x, y, z, c='black', s=80, marker='o', label='Municipality of Lima')
+        ax.set_xlabel('f1 (Distance)', fontsize=12, labelpad=10)
+        ax.set_ylabel('f2 (Vulnerability)', fontsize=12, labelpad=10)
+        ax.set_zlabel('f3 (Coverage)', fontsize=12, labelpad=10)
+
+        ax.view_init(elev=20, azim=45)
+
+        ax.grid(True, linestyle='--', alpha=0.4)
+        plt.tight_layout()
+        plt.show()
+        
         
         #fig = px.scatter_3d(
         #translated_df,
