@@ -5,7 +5,7 @@ import streamlit as st
 from streamlit_folium import folium_static
 
 def load_shelters():
-    return pd.read_excel("albergues_select_nsga.xlsx")
+    return pd.read_excel("albergues_select_nsga1.xlsx")
 
 def show_map(selected_shelters):
     muni_df = pd.read_excel("ALBERGUES TEMPORALES MUNICIPALIDAD_v2.xlsx")
