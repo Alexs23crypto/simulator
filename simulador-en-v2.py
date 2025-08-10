@@ -63,95 +63,95 @@ def mostrar_resultado(albergues_df, pareto_df, metodo):
         })
         
         # Gráfico 3D con nombres en inglés
-        fig = plt.figure(figsize=(8, 6))
-        ax = fig.add_subplot(111, projection='3d')
+        #fig = plt.figure(figsize=(8, 6))
+        #ax = fig.add_subplot(111, projection='3d')
 
         # Graficar puntos
-        ax.scatter(
-            translated_df['Distance between shelters'],
-            translated_df['Seismic vulnerability and risk'],
-            translated_df['Demanded population'],
-            c='blue',
-            s=40,
-            marker='o'
-        )
+        #ax.scatter(
+            #translated_df['Distance between shelters'],
+            #translated_df['Seismic vulnerability and risk'],
+            #translated_df['Demanded population'],
+            #c='blue',
+            #s=40,
+            #marker='o'
+        #)
 
-        ax.scatter(
-            translated_df[translated_df['Indice'] == selected_id]['Distance between shelters'],
-            translated_df[translated_df['Indice'] == selected_id]['Seismic vulnerability and risk'],
-            translated_df[translated_df['Indice'] == selected_id]['Demanded population'],
-            c='red',
-            s=45,
-            marker='o',
-            label='Municipality of Lima'
-        )
+        #ax.scatter(
+            #translated_df[translated_df['Indice'] == selected_id]['Distance between shelters'],
+            #translated_df[translated_df['Indice'] == selected_id]['Seismic vulnerability and risk'],
+            #translated_df[translated_df['Indice'] == selected_id]['Demanded population'],
+            #c='red',
+            #s=45,
+            #marker='o',
+            #label='Municipality of Lima'
+        #)
 
-        ax.scatter(
-            translated_df[translated_df['Indice'] == 20]['Distance between shelters'],
-            translated_df[translated_df['Indice'] == 20]['Seismic vulnerability and risk'],
-            translated_df[translated_df['Indice'] == 20]['Demanded population'],
-            c='black',
-            s=45,
-            marker='o',
-            label='Municipality of Lima'
-        )  
+        #ax.scatter(
+            #translated_df[translated_df['Indice'] == 20]['Distance between shelters'],
+            #translated_df[translated_df['Indice'] == 20]['Seismic vulnerability and risk'],
+            #translated_df[translated_df['Indice'] == 20]['Demanded population'],
+            #c='black',
+            #s=45,
+            #marker='o',
+            #label='Municipality of Lima'
+        #)  
                 
         
         
         # Etiquetas
-        ax.set_xlabel('f1 (Distance)')
-        ax.set_ylabel('f2 (Vulnerability)')
-        ax.set_zlabel('f3 (Coverage)')
-        ax.set_title('Frente de Pareto')
+        #ax.set_xlabel('f1 (Distance)')
+        #ax.set_ylabel('f2 (Vulnerability)')
+        #ax.set_zlabel('f3 (Coverage)')
+        #ax.set_title('Frente de Pareto')
         
         # Ajustar estilo
-        ax.grid(True)
-        ax.view_init(elev=20, azim=45)  # Controla el ángulo de vista
+        #ax.grid(True)
+        #ax.view_init(elev=20, azim=45)  # Controla el ángulo de vista
         
         # Mostrar en Streamlit
-        st.pyplot(fig)
+        #st.pyplot(fig)
             
                 
         
-        #fig = px.scatter_3d(
-        #translated_df,
-            #x='Distance between shelters',
-            #y='Seismic vulnerability and risk',
-            #z='Demanded population',
-            #color='Color',
-            #color_discrete_map={'Selected': 'red', 'Not selected': 'blue', 'Municipality of Lima': 'black'},
-            #custom_data=['Indice'],
-            #text='Indice',
-            #height=500,
-            #labels={
-                #'Distance between shelters': 'f1(Distance)',
-                #'Seismic vulnerability and risk': 'f2(Vulnerability)',
-                #'Demanded population': 'f3(Coverage)'
-            #}
-        #)
+        fig = px.scatter_3d(
+        translated_df,
+            x='Distance between shelters',
+            y='Seismic vulnerability and risk',
+            z='Demanded population',
+            color='Color',
+            color_discrete_map={'Selected': 'red', 'Not selected': 'blue', 'Municipality of Lima': 'black'},
+            custom_data=['Indice'],
+            text='Indice',
+            height=500,
+            labels={
+                'Distance between shelters': 'f1(Distance)',
+                'Seismic vulnerability and risk': 'f2(Vulnerability)',
+                'Demanded population': 'f3(Coverage)'
+            }
+        )
         
         # Refuerza los títulos por si no los toma bien
-        #fig.update_layout(
-            #scene=dict(
-                #xaxis_title='f1(Distance)',
-                #yaxis_title='f2(Vulnerability)',
-                #zaxis_title='f3(Coverage)'
-            #),
-            #showlegend=False
-        #)
+        fig.update_layout(
+            scene=dict(
+                xaxis_title='f1(Distance)',
+                yaxis_title='f2(Vulnerability)',
+                zaxis_title='f3(Coverage)'
+            ),
+            showlegend=False
+        )
         
         # Tooltip personalizado con los nombres reales
-        #fig.update_traces(
-            #textposition='top center',
-            #hovertemplate="<br>".join([
-                #"Solution: %{customdata[0]}",
-                #"Distance between shelters: %{x}",
-                #"Seismic vulnerability and risk: %{y}",
-                #"Demanded population: %{z}"
-            #])
-        #)
+        fig.update_traces(
+            textposition='top center',
+            hovertemplate="<br>".join([
+                "Solution: %{customdata[0]}",
+                "Distance between shelters: %{x}",
+                "Seismic vulnerability and risk: %{y}",
+                "Demanded population: %{z}"
+            ])
+        )
         
-        #st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, use_container_width=True)
 
         st.markdown("""
         **f1**: Distance between shelters  
