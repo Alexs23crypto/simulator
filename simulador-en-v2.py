@@ -72,6 +72,7 @@ def mostrar_resultado(albergues_df, pareto_df, metodo):
             translated_df['Seismic vulnerability and risk'],
             translated_df['Demanded population'],
             c='blue',
+            s=40,
             marker='o'
         )
 
@@ -80,6 +81,7 @@ def mostrar_resultado(albergues_df, pareto_df, metodo):
             translated_df[translated_df['Indice'] == selected_id]['Seismic vulnerability and risk'],
             translated_df[translated_df['Indice'] == selected_id]['Demanded population'],
             c='red',
+            s=45,
             marker='o',
             label='Municipality of Lima'
         )
@@ -89,6 +91,7 @@ def mostrar_resultado(albergues_df, pareto_df, metodo):
             translated_df[translated_df['Indice'] == 20]['Seismic vulnerability and risk'],
             translated_df[translated_df['Indice'] == 20]['Demanded population'],
             c='black',
+            s=45,
             marker='o',
             label='Municipality of Lima'
         )  
