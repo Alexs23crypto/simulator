@@ -4,6 +4,7 @@ import numpy as np
 import folium
 from streamlit_folium import folium_static
 import plotly.express as px
+import matplotlib.pyplot as plt
 import ast
 
 from funciones import show_map, load_shelters
@@ -62,52 +63,63 @@ def mostrar_resultado(albergues_df, pareto_df, metodo):
         })
         
         # Gráfico 3D con nombres en inglés
-        fig = px.scatter_3d(
-        translated_df,
-            x='Distance between shelters',
-            y='Seismic vulnerability and risk',
-            z='Demanded population',
-            color='Color',
-            color_discrete_map={'Selected': 'red', 'Not selected': 'blue', 'Municipality of Lima': 'black'},
-            custom_data=['Indice'],
-            text='Indice',
-            height=500,
-            labels={
-                'Distance between shelters': 'f1(Distance)',
-                'Seismic vulnerability and risk': 'f2(Vulnerability)',
-                'Demanded population': 'f3(Coverage)'
-            }
-        )
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
+        ax.scatter(translated_df['Distance between shelters'], translated_df['Seismic vulnerability and risk'], translated_df['Demanded population'], c='blue', marker='o')
+        ax.set_xlabel('f1(Distance)')
+        ax.set_ylabel('f2(Vulnerability)')
+        ax.set_zlabel('f3(Coverage)')
+        
+        #plt.title('Frente de Pareto')
+        plt.show()
+
+        
+        #fig = px.scatter_3d(
+        #translated_df,
+            #x='Distance between shelters',
+            #y='Seismic vulnerability and risk',
+            #z='Demanded population',
+            #color='Color',
+            #color_discrete_map={'Selected': 'red', 'Not selected': 'blue', 'Municipality of Lima': 'black'},
+            #custom_data=['Indice'],
+            #text='Indice',
+            #height=500,
+            #labels={
+                #'Distance between shelters': 'f1(Distance)',
+                #'Seismic vulnerability and risk': 'f2(Vulnerability)',
+                #'Demanded population': 'f3(Coverage)'
+            #}
+        #)
         
         # Refuerza los títulos por si no los toma bien
-        fig.update_layout(
-            scene=dict(
-                xaxis_title='f1(Distance)',
-                yaxis_title='f2(Vulnerability)',
-                zaxis_title='f3(Coverage)'
-            ),
-            showlegend=False
-        )
+        #fig.update_layout(
+            #scene=dict(
+                #xaxis_title='f1(Distance)',
+                #yaxis_title='f2(Vulnerability)',
+                #zaxis_title='f3(Coverage)'
+            #),
+            #showlegend=False
+        #)
         
         # Tooltip personalizado con los nombres reales
-        fig.update_traces(
-            textposition='top center',
-            hovertemplate="<br>".join([
-                "Solution: %{customdata[0]}",
-                "Distance between shelters: %{x}",
-                "Seismic vulnerability and risk: %{y}",
-                "Demanded population: %{z}"
-            ])
-        )
+        #fig.update_traces(
+            #textposition='top center',
+            #hovertemplate="<br>".join([
+                #"Solution: %{customdata[0]}",
+                #"Distance between shelters: %{x}",
+                #"Seismic vulnerability and risk: %{y}",
+                #"Demanded population: %{z}"
+            #])
+        #)
         
-        st.plotly_chart(fig, use_container_width=True)
+        #st.plotly_chart(fig, use_container_width=True)
 
         st.markdown("""
         **f1**: Distance between shelters  
         **f2**: Seismic vulnerability and risk  
         **f3**: Demanded population
         """)
-        st.markdown("Point 20 (black) represents the solution of the Municipality of Lima")
+        st.markdown("**Note:** Point 20 (black) represents the solution of the Municipality of Lima")
 
     with col2:
         st.subheader("🗺️ Map of Shelters")
