@@ -63,30 +63,52 @@ def mostrar_resultado(albergues_df, pareto_df, metodo):
         })
         
         # Gráfico 3D con nombres en inglés
-        fig = plt.figure(figsize=(10, 7))
-        ax = fig.add_subplot(111, projection='3d')
-        
-        # Puntos del frente de Pareto
-        ax.scatter(
-            translated_df['Distance between shelters'], 
-            translated_df['Seismic vulnerability and risk'], 
-            translated_df['Demanded population'], 
-            c='royalblue', 
-            s=60,             # tamaño de puntos
-            alpha=0.8,        # transparencia ligera
-            edgecolors='k'    # borde negro para resaltar
+        # Crear gráfico 3D
+        fig = px.scatter_3d(
+            translated_df,
+            x='Distance between shelters',
+            y='Seismic vulnerability and risk',
+            z='Demanded population',
+            color='Color',
+            color_discrete_map={
+                'Selected': 'red',
+                'Not selected': 'blue',
+                'Municipality of Lima': 'black'
+            },
+            custom_data=['Indice'],
+            text='Indice',
+            height=500,
+            labels={
+                'Distance between shelters': 'f1(Distance)',
+                'Seismic vulnerability and risk': 'f2(Vulnerability)',
+                'Demanded population': 'f3(Coverage)'
+            }
         )
-
-        #ax.scatter(x, y, z, c='black', s=80, marker='o', label='Municipality of Lima')
-        ax.set_xlabel('f1 (Distance)', fontsize=12, labelpad=10)
-        ax.set_ylabel('f2 (Vulnerability)', fontsize=12, labelpad=10)
-        ax.set_zlabel('f3 (Coverage)', fontsize=12, labelpad=10)
-
-        ax.view_init(elev=20, azim=45)
-
-        ax.grid(True, linestyle='--', alpha=0.4)
-        st.pyplot(fig)
         
+        # Configuración de ejes y sin leyenda
+        fig.update_layout(
+            scene=dict(
+                xaxis_title='f1(Distance)',
+                yaxis_title='f2(Vulnerability)',
+                zaxis_title='f3(Coverage)'
+            ),
+            showlegend=False
+        )
+        
+        # Tooltip personalizado
+        fig.update_traces(
+            textposition='top center',
+            hovertemplate="<br>".join([
+                "Solution: %{customdata[0]}",
+                "Distance between shelters: %{x}",
+                "Seismic vulnerability and risk: %{y}",
+                "Demanded population: %{z}"
+            ])
+        )
+        
+        # Mostrar en Streamlit
+        st.plotly_chart(fig, use_container_width=True)
+                
         
         #fig = px.scatter_3d(
         #translated_df,
