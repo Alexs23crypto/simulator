@@ -77,7 +77,7 @@ def mostrar_resultado(albergues_df, pareto_df, metodo):
             edgecolors='k'    # borde negro para resaltar
         )
 
-        ax.scatter(x, y, z, c='black', s=80, marker='o', label='Municipality of Lima')
+        #ax.scatter(x, y, z, c='black', s=80, marker='o', label='Municipality of Lima')
         ax.set_xlabel('f1 (Distance)', fontsize=12, labelpad=10)
         ax.set_ylabel('f2 (Vulnerability)', fontsize=12, labelpad=10)
         ax.set_zlabel('f3 (Coverage)', fontsize=12, labelpad=10)
