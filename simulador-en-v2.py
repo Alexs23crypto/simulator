@@ -85,8 +85,7 @@ def mostrar_resultado(albergues_df, pareto_df, metodo):
         ax.view_init(elev=20, azim=45)
 
         ax.grid(True, linestyle='--', alpha=0.4)
-        plt.tight_layout()
-        plt.show()
+        st.pyplot(fig)
         
         
         #fig = px.scatter_3d(
