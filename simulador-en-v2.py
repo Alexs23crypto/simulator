@@ -73,18 +73,18 @@ def mostrar_resultado(albergues_df, pareto_df, metodo):
             text='Indice',
             height=500,
             labels={
-                'Distance between shelters': 'Objective 1',
-                'Seismic vulnerability and risk': 'Objective 2',
-                'Demanded population': 'Objective 3'
+                'Distance between shelters': 'f1(Distance)',
+                'Seismic vulnerability and risk': 'f2(Vulnerability)',
+                'Demanded population': 'f3(Coverage)'
             }
         )
         
         # Refuerza los títulos por si no los toma bien
         fig.update_layout(
             scene=dict(
-                xaxis_title='Objective 1',
-                yaxis_title='Objective 2',
-                zaxis_title='Objective 3'
+                xaxis_title='f1(Distance)',
+                yaxis_title='f2(Vulnerability)',
+                zaxis_title='f3(Coverage)'
             ),
             showlegend=False
         )
@@ -103,10 +103,11 @@ def mostrar_resultado(albergues_df, pareto_df, metodo):
         st.plotly_chart(fig, use_container_width=True)
 
         st.markdown("""
-        **Objective 1**: Distance between shelters  
-        **Objective 2**: Seismic vulnerability and risk  
-        **Objective 3**: Demanded population
+        **f1**: Distance between shelters  
+        **f2**: Seismic vulnerability and risk  
+        **f3**: Demanded population
         """)
+        st.markdown("Point 20 (black) represents the solution of the Municipality of Lima")
 
     with col2:
         st.subheader("🗺️ Map of Shelters")
